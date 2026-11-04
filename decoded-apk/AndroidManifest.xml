@@ -58,5 +58,15 @@
         <activity android:configChanges="keyboard|keyboardHidden|navigation|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|density" android:exported="false" android:name="com.mengxin.launcher.VideoPlayerActivity" android:screenOrientation="landscape" android:theme="@style/PlayerTheme"/>
         <activity android:exported="true" android:name="com.mengxin.launcher.ExoProbeActivity" android:screenOrientation="landscape" android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
         <activity android:exported="true" android:name="com.mengxin.launcher.FrameProbeActivity" android:screenOrientation="landscape" android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
+        <!-- 新增开机广播接收器 -->
+        <receiver
+            android:name="com.mengxin.launcher.native.BootReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
     </application>
 </manifest>
