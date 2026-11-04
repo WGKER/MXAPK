@@ -1,6 +1,9 @@
 name: Apktool Decode
 on:
-  workflow_dispatch: # 手动触发（推荐）
+  workflow_dispatch:
+  push:
+    paths:
+      - 'app.apk'
 
 jobs:
   decode:
@@ -15,9 +18,10 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Download apktool
+      - name: Download apktool v3.0.3
         run: |
-          wget https://github.com/iBotPeaches/Apktool/releases/latest/download/apktool.jar
+          # jar包带版本号
+          wget https://github.com/iBotPeaches/Apktool/releases/download/v3.0.3/apktool_3.0.3.jar -O apktool.jar
           wget https://raw.githubusercontent.com/iBotPeaches/Apktool/master/scripts/linux/apktool
           chmod +x apktool
           sudo mv apktool /usr/local/bin/
