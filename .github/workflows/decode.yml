@@ -1,0 +1,27 @@
+name: Apktool Decode
+on:
+  workflow_dispatch: # 手动在仓库页面点按钮触发
+  push:
+    paths:
+      - 'app.apk'
+jobs:
+  decode:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - name: Download apktool
+        run: |
+          wget https://github.com/iBotPeaches/Apktool/releases/download/v2.9.3/apktool_2.9.3.jar -O apktool.jar
+      - name: Decode APK
+        run: |
+          java -jar apktool.jar d -f app.apk -o decoded_out
+      - name: Upload decoded result
+        uses: actions/upload-artifact@v4
+        with:
+          name: decoded-smali
+          path: decoded_out
